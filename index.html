@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>PCMAP Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>PCMAP: Pokémon Card Marketplace and Auction Platform</h1>
+    </header>
+
+    <main>
+        <section id="rationale">
+            <div class="dropdown">📘 Rationale <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <p>
+                The Pokémon Trading Card Game (TCG) has become more than just a hobby it’s now a serious market where cards are treated as collectibles with real value. 
+                However, most existing online platforms don't meet the specific needs of Pokémon card collectors and sellers. Websites like eBay or Facebook Marketplace often have high fees, 
+                fake cards, and no proper system for verifying sellers or the cards themselves. This makes trading risky and frustrating for many people.<br><br>
+        
+                Because of this, there’s a clear need for a trusted and secure online space made especially for Pokémon card enthusiasts. This study aims to build a platform that solves these problems. 
+                By having an admin manage all listings, verifying the cards, and using smart contracts for secure transactions, the platform will offer safer buying, selling, and auctioning of Pokémon cards.<br><br> 
+                It will also reduce scams, lower fees, and give users more confidence in each trade.
+        
+                This project is important because it creates a better experience for the Pokémon TCG community by giving them a platform they can rely on one that protects both the buyer and the seller, 
+                and keeps everything fair and transparent.
+                </p>
+            </div>
+        </section>
+        
+        <section id="objectives">
+            <div class="dropdown">🎯 Objectives <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <p>To develop a specialized Pokémon Card Marketplace and Auction Platform that ensures secure, 
+                    authenticated, and transparent card selling, trading, and bidding experiences.</p>
+                <ul>
+                    <li>To create a dedicated online marketplace for Pokémon card listings and auctions.</li>
+                    <li>To implement smart contracts using Solidity for transparent, rule-enforced transaction execution and auction automation.</li>
+                    <li>To integrate a card authentication system through admin verification and unique digital certificates generated via hashing.</li>
+                    <li>To incorporate a reputation system with badges, reviews, and credibility scoring.</li>
+                    <li>To enable secure, escrow-based payment systems to reduce the risk of fraud.</li>
+                    <li>To develop an intuitive and user-friendly interface tailored to TCG collectors.</li>
+                    <li>To provide real-time auction capabilities with automated smart transaction logs.</li>
+                    <li>To allow buyers to verify card authenticity and seller reputation before making purchases.</li>
+                    <li>To reduce transaction fees through a clear and commission-based model.</li>
+                    <li>To foster community engagement through transparent feedback and verification mechanisms.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="db-architecture">
+            <div class="dropdown">🗂 Database Architecture <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <p3>
+                    For this project, we chose to implement a relational database due to its structured nature, 
+                    data integrity, and ability to efficiently handle complex relationships between entities. 
+                    The platform involves various interconnected components such as users, Pokémon cards, 
+                    auctions, bids, and transactions, all of which require consistent and reliable linking through primary and foreign keys. 
+                    A relational database provides a logical, organized way to manage these relationships while ensuring data accuracy and referential integrity. 
+                    Additionally, the use of SQL allows us to perform powerful queries to support features like real-time bidding, user reputation tracking, 
+                    and secure transaction logging. This makes relational databases like MySQL the ideal choice for building a scalable, secure, 
+                    and data-driven marketplace system.
+                </p3>
+            </div>
+        </section>
+        
+        <section id="erd">
+            <div class="dropdown">🔗 Entity Relationship Diagram <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <img src="erd.png" alt="ERD">
+            </div>
+        </section>
+        
+        <section id="sql-queries">
+            <div class="dropdown">🧩 SQL Queries <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <img src="assets/sql_queries.png" alt="SQL Queries">
+            </div>
+        </section>
+        
+        <section id="db-fiddle">
+            <div class="dropdown">🔗 DB-Fiddle Link <span class="dropdown-arrow">▼</span></div>
+            <div class="dropdown-content">
+                <a href="https://www.db-fiddle.com/f/woDz6gMiMYRyXNsDSwSxuV/0?fbclid=IwZXh0bgNhZW0CMTEAAR41fBDR4hxvEF6Nhu-zHWd_s0cOGMkV-4aUt0Quq13C1DpRJtKh4_eDajc3NQ_aem_flDVq6X-nlS4gDhUxTn2zA" 
+                target="_blank">Visit DB-Fiddle for SQL Simulation</a>
+            </div>
+        </section>        
+    </main>
+
+    <footer>
+        <p>Created by Ceniza, Lego, and Gener • Hosted on <a href="https://www.000webhost.com/" target="_blank">000webhost</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
