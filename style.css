@@ -102,8 +102,3 @@ main section {
 .dropdown.active .dropdown-arrow {
     transform: rotate(180deg);
 }
-
-#sql-queries .dropdown-content code {
-    font-weight: bold;
-    font-family: monospace;
-}
