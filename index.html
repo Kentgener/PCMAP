@@ -76,109 +76,15 @@
         <section id="sql-queries">
             <div class="dropdown">🧩 SQL Queries <span class="dropdown-arrow">▼</span></div>
             <div class="dropdown-content">
-                <code>
-                <pre>
-                    <p5>
-                    CREATE TABLE user (
-                        userid INT AUTO_INCREMENT PRIMARY KEY,
-                        username VARCHAR(255) NOT NULL,
-                        password VARCHAR(255) NOT NULL,
-                        fullname VARCHAR(255) NOT NULL,
-                        age INT,
-                        contact VARCHAR(255),
-                        full_address TEXT,
-                        position ENUM('none', 'admin') NOT NULL,
-                        user_image LONGBLOB,
-                        userid_image LONGBLOB
-                    );
-
-                    CREATE TABLE event (
-                        event_id INT AUTO_INCREMENT PRIMARY KEY,
-                        event_name VARCHAR(255),
-                        image LONGBLOB,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );
-
-                    CREATE TABLE card (
-                        cardid INT AUTO_INCREMENT PRIMARY KEY,
-                        cardname VARCHAR(255) NOT NULL,
-                        cardset VARCHAR(255),
-                        condition ENUM('mint', 'nearmint', 'lightlyplayed', 'mediumplayed', 'highlyplayed') NOT NULL,
-                        ownerid INT,
-                        card_image LONGBLOB,
-                        card_hash CHAR(64) NOT NULL,
-                        FOREIGN KEY (ownerid) REFERENCES user(userid) ON DELETE SET NULL
-                    );
-
-
-                    CREATE TABLE listing (
-                        listingid INT AUTO_INCREMENT PRIMARY KEY,
-                        cardid INT,
-                        sellerid INT,
-                        price DECIMAL(10, 2) NOT NULL,   
-                        listing_type ENUM('auction', 'fixed') NOT NULL,
-                        status ENUM('active', 'sold', 'cancelled') NOT NULL,
-                        created_at DATETIME NOT NULL,
-                        FOREIGN KEY (cardid) REFERENCES card(cardid) ON DELETE CASCADE,
-                        FOREIGN KEY (sellerid) REFERENCES user(userid) ON DELETE CASCADE
-                    );
-
-                    CREATE TABLE auction (
-                        auctionid INT AUTO_INCREMENT PRIMARY KEY,
-                        listingid INT,
-                        start_time DATETIME NOT NULL,
-                        end_time DATETIME NOT NULL,
-                        starting_price DECIMAL(10, 2) NOT NULL,
-                        current_price DECIMAL(10, 2),
-                        FOREIGN KEY (listingid) REFERENCES listing(listingid) ON DELETE CASCADE
-                    );
-
-                    CREATE TABLE bid (
-                        bidid INT AUTO_INCREMENT PRIMARY KEY,
-                        auctionid INT,
-                        bidderid INT,
-                        amount DECIMAL(10, 2) NOT NULL,
-                        bid_time DATETIME NOT NULL,
-                        FOREIGN KEY (auctionid) REFERENCES auction(auctionid) ON DELETE CASCADE,
-                        FOREIGN KEY (bidderid) REFERENCES user(userid) ON DELETE CASCADE
-                    );
-
-                    CREATE TABLE cart (
-                        cartid INT AUTO_INCREMENT PRIMARY KEY,
-                        userid INT NOT NULL,
-                        listingid INT NOT NULL,
-                        quantity INT DEFAULT 1,
-                        added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY (userid) REFERENCES user(userid) ON DELETE CASCADE,
-                        FOREIGN KEY (listingid) REFERENCES listing(listingid) ON DELETE CASCADE
-                    );
-
-                    CREATE TABLE transaction (
-                        transactionid INT AUTO_INCREMENT PRIMARY KEY,
-                        listingid INT,
-                        buyerid INT,
-                        sellerid INT,
-                        price DECIMAL(10, 2) NOT NULL,
-                        transaction_date DATETIME NOT NULL,
-                        status ENUM('completed', 'refunded') NOT NULL,
-                        FOREIGN KEY (listingid) REFERENCES listing(listingid) ON DELETE CASCADE,
-                        FOREIGN KEY (buyerid) REFERENCES user(userid) ON DELETE CASCADE,
-                        FOREIGN KEY (sellerid) REFERENCES user(userid) ON DELETE CASCADE
-                    );
-
-                    CREATE TABLE review (
-                        reviewid INT AUTO_INCREMENT PRIMARY KEY,
-                        transactionid INT,
-                        reviewerid INT,
-                        rating INT CHECK (rating BETWEEN 1 AND 5),
-                        comment TEXT,
-                        created_at DATETIME NOT NULL,
-                        FOREIGN KEY (transactionid) REFERENCES transaction(transactionid) ON DELETE CASCADE,
-                        FOREIGN KEY (reviewerid) REFERENCES user(userid) ON DELETE CASCADE
-                    );
-                    </p5>
-                </pre>
-                </code>
+                <div class="dropdown">1. To create a dedicated online marketplace for Pokémon card listings and auctions. <span class="dropdown-arrow">▼</span></div>
+                <div class="dropdown-content">
+                    1. To create a dedicated online marketplace for Pokémon card listings and auctions.
+                    <li>Registering a new user</li>
+                    <section id="Registering a new user">
+                    INSERT INTO user (username, password, fullname, age, contact, full_address, position)
+                    VALUES ('ashketchum', 'pikachurules', 'Ash Ketchum', 10, '09171234567', 'Pallet Town, Kanto', 'none');
+                    </section>
+                </div>
             </div>
         </section>
         
