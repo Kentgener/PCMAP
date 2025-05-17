@@ -77,10 +77,102 @@
                 <div style="font-size: 20px;">
                     1. To create a dedicated online marketplace for Pokémon card listings and auctions.
                 </div>
-                    <li>Registering a new user</li>
+                    <li>Registering a new user:</li>
                     <pre class="code-box"><code>
-                    INSERT INTO user (username, password, fullname, age, contact, full_address, position)
-                    VALUES ('ashketchum', 'pikachurules', 'Ash Ketchum', 10, '09171234567', 'Pallet Town, Kanto', 'none');
+INSERT INTO user (username, password, fullname, age, contact, full_address, position)
+VALUES ('ashketchum', 'pikachurules', 'Ash Ketchum', 10, '09171234567', 'Pallet Town, Kanto', 'none');
+                    </code></pre>
+                    <li>Adding a new Pokémon card to a user's collection:</li>
+                    <pre class="code-box"><code>
+INSERT INTO card (cardname, cardset, `condition`, ownerid, card_image, card_hash)
+VALUES ('Charizard', 'Base Set', 'mint', (SELECT userid FROM user WHERE username = 'ashketchum'), LOAD_FILE('/path/to/charizard.jpg'), 'generated_hash_for_charizard');
+                    </code></pre>
+                    <li>Creating a fixed-price listing for a card:</li>
+                    <pre class="code-box"><code>
+                    INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
+                    VALUES (
+                        (SELECT cardid FROM card WHERE cardname = 'Charizard' AND ownerid = (SELECT userid FROM user WHERE username = 'ashketchum')),
+                        (SELECT userid FROM user WHERE username = 'ashketchum'),
+                        1500.00,
+                        'fixed',
+                        'active',
+                        NOW()
+                    );
+                    </code></pre>
+                    <li>Creating an auction listing for a card:</li>
+                    <pre class="code-box"><code>
+                    INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
+                    VALUES (
+                        (SELECT cardid FROM card WHERE cardname = 'Blastoise' AND ownerid = (SELECT userid FROM user WHERE username = 'mistywaterflower')),
+                        (SELECT userid FROM user WHERE username = 'mistywaterflower'),
+                        0.00, -- Price for auction is often handled by auction table's starting_price
+                        'auction',
+                        'active',
+                        NOW()
+                    );
+                    
+                    INSERT INTO auction (listingid, start_time, end_time, starting_price)
+                    VALUES (
+                        (SELECT listingid FROM listing WHERE cardid = (SELECT cardid FROM card WHERE cardname = 'Blastoise') AND listing_type = 'auction' ORDER BY created_at DESC LIMIT 1),
+                        NOW(),
+                        DATE_ADD(NOW(), INTERVAL 7 DAY),
+                        100.00
+                    );
+                    </code></pre>
+                    <li>Viewing all active fixed-price listings:</li>
+                    <pre class="code-box"><code>
+                    SELECT
+                        l.listingid,
+                        c.cardname,
+                        c.cardset,
+                        c.`condition`,
+                        l.price,
+                        u.username AS seller_username
+                    FROM
+                        listing AS l
+                    JOIN
+                        card AS c ON l.cardid = c.cardid
+                    JOIN
+                        user AS u ON l.sellerid = u.userid
+                    WHERE
+                        l.listing_type = 'fixed' AND l.status = 'active';
+                    </code></pre>
+                    <li>Viewing all active auction listings:</li>
+                    <pre class="code-box"><code>
+                    SELECT
+                        l.listingid,
+                        c.cardname,
+                        c.cardset,
+                        c.`condition`,
+                        a.starting_price,
+                        a.current_price,
+                        a.start_time,
+                        a.end_time,
+                        u.username AS seller_username
+                    FROM
+                        listing AS l
+                    JOIN
+                        card AS c ON l.cardid = c.cardid
+                    JOIN
+                        user AS u ON l.sellerid = u.userid
+                    JOIN
+                        auction AS a ON l.listingid = a.listingid
+                    WHERE
+                        l.listing_type = 'auction' AND l.status = 'active' AND a.end_time > NOW();
+                    </code></pre>
+                    <li>Placing a bid on an auction:</li>
+                    <pre class="code-box"><code>
+INSERT INTO bid (auctionid, bidderid, amount, bid_time)
+VALUES (
+    (SELECT auctionid FROM auction WHERE listingid = 123), -- Replace 123 with actual listingid
+    (SELECT userid FROM user WHERE username = 'garyoak'),
+    120.00,
+    NOW()
+);
+
+UPDATE auction
+SET current_price = 120.00
+WHERE auctionid = (SELECT auctionid FROM auction WHERE listingid = 123);
                     </code></pre>
             </div>
         </section>
