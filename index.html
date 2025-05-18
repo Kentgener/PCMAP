@@ -131,21 +131,21 @@
                 <div style="font-size: 20px;">
                     User and Admin Management
                 </div>
-                    <li><div style="font-size: 15px;">Create a new user (defaulting to 'none' position):</div></li>
+                    <li><div style="font-size: 18px;">Create a new user (defaulting to 'none' position):</div></li>
                     <pre class="code-box"><code>
 INSERT INTO user (username, password, fullname, age, contact, full_address, position, user_image, userid_image)
 VALUES ('newuser', 'hashedpassword123', 'New User', 30, '123-456-7890', '123 Main St, Anytown', 'none', NULL, NULL);
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Create a new admin user:</div></li>
+                    <li><div style="font-size: 18px;">Create a new admin user:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO user (username, password, fullname, age, contact, full_address, position, user_image, userid_image)
 VALUES ('adminuser', 'hashedadminpassword', 'Admin Name', 45, '987-654-3210', 'Admin Office, City', 'admin', NULL, NULL);
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve user information (excluding password for security):</div></li>
+                    <li><div style="font-size: 18px;">Retrieve user information (excluding password for security):</div></li>
                     <pre class="code-box"><code>
 SELECT userid, username, fullname, age, contact, full_address, position, user_image, userid_image
 FROM user
@@ -153,7 +153,7 @@ WHERE userid = 1; -- Replace with actual userid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Update user's contact information:</div></li>
+                    <li><div style="font-size: 18px;">Update user's contact information:</div></li>
                     <pre class="code-box"><code>
 UPDATE user
 SET contact = '090-000-0000'
@@ -161,7 +161,7 @@ WHERE userid = 1; -- Replace with actual userid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Change a user's position to 'admin':</div></li>
+                    <li><div style="font-size: 18px;">Change a user's position to 'admin':</div></li>
                     <pre class="code-box"><code>
 UPDATE user
 SET position = 'admin'
@@ -169,7 +169,7 @@ WHERE userid = 2; -- Replace with actual userid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Verify user login (example - in a real application, password hashing and secure comparison would be used):</div></li>
+                    <li><div style="font-size: 18px;">Verify user login (example - in a real application, password hashing and secure comparison would be used):</div></li>
                     <pre class="code-box"><code>
 SELECT userid, username, position
 FROM user
@@ -180,14 +180,14 @@ WHERE username = 'newuser' AND password = 'hashedpassword123';
                 <div style="font-size: 20px;">
                     Card Listing and Authentication
                 </div>
-                    <li><div style="font-size: 15px;">List a new card:</div></li>
+                    <li><div style="font-size: 18px;">List a new card:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO card (cardname, cardset, `condition`, ownerid, card_image, card_hash)
 VALUES ('Charizard', 'Base Set', 'nearmint', 1, NULL, 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2');
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Admin mechanism to verify card authenticity (This is a conceptual query, actual verification would involve external processes or UI actions):</div></li>
+                    <li><div style="font-size: 18px;">Admin mechanism to verify card authenticity (This is a conceptual query, actual verification would involve external processes or UI actions):</div></li>
                     <pre class="code-box"><code>
 -- Admins would review card_image and card_hash
 -- and then potentially update a status (e.g., if a 'verified' column was added to the card table)
@@ -198,7 +198,7 @@ WHERE c.card_hash = 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve all active listings with card and seller details:</div></li>
+                    <li><div style="font-size: 18px;">Retrieve all active listings with card and seller details:</div></li>
                     <pre class="code-box"><code>
 SELECT
     l.listingid,
@@ -219,21 +219,21 @@ WHERE l.status = 'active';
                 <div style="font-size: 20px;">
                     Direct Sale Transactions
                 </div>
-                    <li><div style="font-size: 15px;">Create a fixed-price listing:</div></li>
+                    <li><div style="font-size: 18px;">Create a fixed-price listing:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
 VALUES (1, 1, 150.00, 'fixed', 'active', NOW()); -- Replace with actual cardid and sellerid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Record a completed direct sale transaction:</div></li>
+                    <li><div style="font-size: 18px;">Record a completed direct sale transaction:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO transaction (listingid, buyerid, sellerid, price, transaction_date, status)
 VALUES (1, 2, 1, 150.00, NOW(), 'completed'); -- Replace with actual listingid, buyerid, sellerid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Update listing status to 'sold' after a direct sale:</div></li>
+                    <li><div style="font-size: 18px;">Update listing status to 'sold' after a direct sale:</div></li>
                     <pre class="code-box"><code>
 UPDATE listing
 SET status = 'sold'
@@ -244,21 +244,21 @@ WHERE listingid = 1; -- Replace with actual listingid
                 <div style="font-size: 20px;">
                     Auction Functionality
                 </div>
-                    <li><div style="font-size: 15px;">Create an auction listing:</div></li>
+                    <li><div style="font-size: 18px;">Create an auction listing:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
 VALUES (2, 1, 0.00, 'auction', 'active', NOW()); -- Price set to 0 as it's an auction
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Initiate an auction for a listing:</div></li>
+                    <li><div style="font-size: 18px;">Initiate an auction for a listing:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO auction (listingid, start_time, end_time, starting_price, current_price)
 VALUES (2, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 10.00, 10.00); -- Replace with actual listingid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve active auctions with current prices:</div></li>
+                    <li><div style="font-size: 18px;">Retrieve active auctions with current prices:</div></li>
                     <pre class="code-box"><code>
 SELECT
     a.auctionid,
@@ -280,14 +280,14 @@ WHERE l.status = 'active' AND l.listing_type = 'auction';
                 <div style="font-size: 20px;">
                     Bidding Management
                 </div>
-                    <li><div style="font-size: 15px;">Place a new bid on an auction:</div></li>
+                    <li><div style="font-size: 18px;">Place a new bid on an auction:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO bid (auctionid, bidderid, amount, bid_time)
 VALUES (1, 3, 15.00, NOW()); -- Replace with actual auctionid and bidderid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Update the current price of an auction after a new bid:</div></li>
+                    <li><div style="font-size: 18px;">Update the current price of an auction after a new bid:</div></li>
                     <pre class="code-box"><code>
 UPDATE auction
 SET current_price = (SELECT MAX(amount) FROM bid WHERE auctionid = 1) -- Replace with actual auctionid
@@ -295,7 +295,7 @@ WHERE auctionid = 1;
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve all bids for a specific auction:</div></li>
+                    <li><div style="font-size: 18px;">Retrieve all bids for a specific auction:</div></li>
                     <pre class="code-box"><code>
 SELECT
     b.bidid,
@@ -312,14 +312,14 @@ ORDER BY b.bid_time DESC;
                 <div style="font-size: 20px;">
                     Transaction Review System
                 </div>
-                    <li><div style="font-size: 15px;">Place a new bid on an auction:</div></li>
+                    <li><div style="font-size: 18px;">Place a new bid on an auction:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO review (transactionid, reviewerid, rating, comment, created_at)
 VALUES (1, 2, 5, 'Great seller, card arrived quickly and as described!', NOW()); -- Replace with actual transactionid and reviewerid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve all reviews for a specific user (as a seller):</div></li>
+                    <li><div style="font-size: 18px;">Retrieve all reviews for a specific user (as a seller):</div></li>
                     <pre class="code-box"><code>
 SELECT
     r.reviewid,
@@ -335,7 +335,7 @@ WHERE t.sellerid = 1; -- Replace with actual sellerid
                     </code>
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Calculate average rating for a seller:</div></li>
+                    <li><div style="font-size: 18px;">Calculate average rating for a seller:</div></li>
                     <pre class="code-box"><code>
 SELECT AVG(r.rating) AS average_rating
 FROM review r
@@ -347,13 +347,13 @@ WHERE t.sellerid = 1; -- Replace with actual sellerid
                 <div style="font-size: 20px;">
                     Event Organization
                 </div>
-                    <li><div style="font-size: 15px;">Create a new event:</div></li>
+                    <li><div style="font-size: 18px;">Create a new event:</div></li>
                     <pre class="code-box"><code>
 INSERT INTO event (event_name, image, created_at)
 VALUES ('Community Card Tournament', NULL, NOW());
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Retrieve all upcoming events:</div></li>
+                    <li><div style="font-size: 18px;">Retrieve all upcoming events:</div></li>
                     <pre class="code-box"><code>
 SELECT event_id, event_name, created_at, image
 FROM event
@@ -361,7 +361,7 @@ WHERE created_at >= NOW()
 ORDER BY created_at ASC; -- Assuming created_at can also serve as a general event date, or a separate event_date column could be added.
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Update event details (e.g., add an image):</div></li>
+                    <li><div style="font-size: 18px;">Update event details (e.g., add an image):</div></li>
                     <pre class="code-box"><code>
 UPDATE event
 SET image = NULL -- Replace NULL with actual image data
@@ -371,7 +371,7 @@ WHERE event_id = 1; -- Replace with actual eventid
                 <div style="font-size: 20px;">
                     Card-User Association
                 </div>
-                    <li><div style="font-size: 15px;">Find all cards owned by a specific user:</div></li>
+                    <li><div style="font-size: 18px;">Find all cards owned by a specific user:</div></li>
                     <pre class="code-box"><code>
 SELECT
     c.cardid,
@@ -383,7 +383,7 @@ FROM card c
 WHERE c.ownerid = 1; -- Replace with actual userid
                     </pre>
                     <br>
-                    <li><div style="font-size: 15px;">Find all listings created by a specific user:</div></li>
+                    <li><div style="font-size: 18px;">Find all listings created by a specific user:</div></li>
                     <pre class="code-box"><code>
 SELECT
     l.listingid,
