@@ -349,6 +349,7 @@ WHERE t.sellerid = 1;
                     <pre class="code-box"><code>
 INSERT INTO event (event_name, image, created_at)
 VALUES ('Community Card Tournament', NULL, NOW());
+                    </code>
                     </pre>
                     <br>
                     <div style="font-size: 18px;"><li>Retrieve all upcoming events:</li></div>
@@ -356,7 +357,8 @@ VALUES ('Community Card Tournament', NULL, NOW());
 SELECT event_id, event_name, created_at, image
 FROM event
 WHERE created_at >= NOW()
-ORDER BY created_at ASC; 
+ORDER BY created_at ASC;
+                    </code>
                     </pre>
                     <br>
                     <div style="font-size: 18px;"><li>Update event details (e.g., add an image):</li></div>
@@ -364,6 +366,7 @@ ORDER BY created_at ASC;
 UPDATE event
 SET image = NULL 
 WHERE event_id = 1;
+                    </code>
                     </pre>
                     <br><br>
                 <div style="font-size: 20px;">
@@ -378,7 +381,8 @@ SELECT
     c.`condition`,
     c.card_hash
 FROM card c
-WHERE c.ownerid = 1; 
+WHERE c.ownerid = 1;
+                    </code>
                     </pre>
                     <br>
                     <div style="font-size: 18px;"><li>Find all listings created by a specific user:</li></div>
@@ -393,7 +397,8 @@ SELECT
     l.created_at
 FROM listing l
 JOIN card c ON l.cardid = c.cardid
-WHERE l.sellerid = 1; 
+WHERE l.sellerid = 1;
+                    </code>
                     </pre>
                     <br>
                     
