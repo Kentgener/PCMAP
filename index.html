@@ -251,6 +251,23 @@ SET event_description = 'An even grander event for trading and selling rare card
 WHERE event_id = 1;
                     </code>
                     </pre>
+                    <br><br>
+                    <div style="font-size: 20px;">
+                    Allow buyers to complete transactions with price and verification hash.
+                    </div>
+                    <div style="font-size: 18px;"><li><P>This objective is largely covered by the "Allow buyers to purchase cards through a secure transaction process" objective.
+                    The `transaction` table already includes `price` and `detailed_hash`.
+                    
+                    Example of completing a transaction (this assumes the cart checkout process has occurred)
+                    The `INSERT` statement for the `transaction` table as shown above fulfills this,
+                    where `price` is the final transaction price and `detailed_hash` is the verification hash.</P></li></div>
+                    <pre class="code-box"><code>
+INSERT INTO transaction (cart_id, bid_id, price, transaction_date, detailed_hash, status) VALUES
+(1, NULL, 120.00, '2025-05-19 15:00:00', 'txn_hash_001', 'completed'),
+(NULL, 2, 2200.00, '2025-05-23 17:00:00', 'txn_hash_002', 'pending'),
+(2, NULL, 300.00, '2025-05-20 10:00:00', 'txn_hash_003', 'completed');
+                    </code>
+                    </pre>
             </div>
         </section>
         
