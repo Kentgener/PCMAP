@@ -81,286 +81,183 @@
             <div class="dropdown">🧩 SQL Queries <span class="dropdown-arrow">▼</span></div>
             <div class="dropdown-content">
                 <div style="font-size: 20px;">
-                    User and Admin Management
+                    Allow users to register, log in, and manage their buyer profiles.
                 </div>
-                    <div style="font-size: 18px;"><li>Create a new user (defaulting to 'none' position):</li></div>
+                    <div style="font-size: 18px;"><li>Register (INSERT):</li></div>
                     <pre class="code-box"><code>
-INSERT INTO user (username, password, fullname, age, contact, full_address, position, user_image, userid_image)
-VALUES ('newuser', 'hashedpassword123', 'New User', 30, '123-456-7890', '123 Main St, Anytown', 'none', NULL, NULL);
+INSERT INTO user (username, email, password, fullname, age, contact_info, full_address, user_image, valid_id, position) VALUES
+('johndoe', 'john@example.com', 'hashedpassword1', 'John Doe', 28, '123-456-7890', '123 Main St, City A', 'user_img_john.png', 'valid_id_john.png', 'trader'),
+('janedoe', 'jane@example.com', 'hashedpassword2', 'Jane Doe', 32, '987-654-3210', '456 Elm St, City B', 'user_img_jane.png', 'valid_id_jane.png', 'admin'),
+('alexsmith', 'alex@example.com', 'hashedpassword3', 'Alex Smith', 25, '555-123-4567', '789 Oak St, City C', 'user_img_alex.png', 'valid_id_alex.png', 'buyer'),
+('maryjones', 'mary@example.com', 'hashedpassword4', 'Mary Jones', 30, '555-987-6543', '101 Pine St, City D', 'user_img_mary.png', 'valid_id_mary.png', 'trader'),
+('bobmartin', 'bob@example.com', 'hashedpassword5', 'Bob Martin', 27, '555-444-3333', '202 Maple St, City E', 'user_img_bob.png', 'valid_id_bob.png', 'buyer');
                     </code>
                     </pre>
                     <br>
-                    <div style="font-size: 18px;"><li>Create a new admin user:</li></div>
+                    <div style="font-size: 18px;"><li>Log in</li></div>
                     <pre class="code-box"><code>
-INSERT INTO user (username, password, fullname, age, contact, full_address, position, user_image, userid_image)
-VALUES ('adminuser', 'hashedadminpassword', 'Admin Name', 45, '987-654-3210', 'Admin Office, City', 'admin', NULL, NULL);
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve user information (excluding password for security):</li></div>
-                    <pre class="code-box"><code>
-SELECT userid, username, fullname, age, contact, full_address, position, user_image, userid_image
+SELECT user_id, username, email, fullname, position
 FROM user
-WHERE userid = 1;  
+WHERE username = 'johndoe' AND password = 'hashedpassword1';
                     </code>
                     </pre>
                     <br>
-                    <div style="font-size: 18px;"><li>Update user's contact information:</li></div>
+                    <div style="font-size: 18px;"><li>Manage buyer profiles (UPDATE)</li></div>
                     <pre class="code-box"><code>
 UPDATE user
-SET contact = '090-000-0000'
-WHERE userid = 1; 
+SET fullname = 'John D. Doe', contact_info = '09123456789', full_address = '456 Updated St, City A'
+WHERE user_id = 1;
                     </code>
                     </pre>
                     <br>
-                    <div style="font-size: 18px;"><li>Change a user's position to 'admin':</li></div>
+                    <div style="font-size: 20px;">
+                    Allow admin to verify physical Pokémon cards and store their details in the system.
+                    </div>
+                    <div style="font-size: 18px;"><li>Verify and Store Card Details (INSERT into card table, typically done by an admin user)</li></div>
                     <pre class="code-box"><code>
-UPDATE user
-SET position = 'admin'
-WHERE userid = 2; 
+INSERT INTO card (user_id, cardname, cardset, `condition`, card_image, card_hash) VALUES
+(1, 'Pikachu', 'Base Set', 'Near Mint', 'card_img_pikachu.png', 'hash_pikachu_123'),
+(1, 'Charizard', 'Base Set', 'Excellent', 'card_img_charizard.png', 'hash_charizard_456'),
+(4, 'Bulbasaur', 'Jungle Set', 'Good', 'card_img_bulbasaur.png', 'hash_bulbasaur_789'),
+(2, 'Mewtwo', 'Fossil Set', 'Mint', 'card_img_mewtwo.png', 'hash_mewtwo_101'),
+(3, 'Gyarados', 'Base Set', 'Near Mint', 'card_img_gyarados.png', 'hash_gyarados_202'),
+(2, 'Charmander', 'Base Set', 'Mint', 'card_img_charmander.png', 'hash_charmander_111');
+                    </code>
+                    </pre>
+                    <br><br>
+                    <div style="font-size: 20px;">
+                    Allow admin to create listings for verified cards with price, condition, and listing type.
+                    </div>
+                    <div style="font-size: 18px;"><li>Create Sale Listing (INSERT into listing table, done by an admin or authorized user)</li></div>
+                    <div style="font-size: 18px;"><li>Create Auction Listing (INSERT into listing table, done by an admin or authorized user)</li></div>
+                    <pre class="code-box"><code>
+INSERT INTO listing (card_id, user_id, price, listing_type, status) VALUES
+(1, 1, 120.00, 'sale', 'active'),
+(2, 1, 2500.00, 'auction', 'active'),
+(3, 4, 35.00, 'sale', 'sold'),
+(4, 2, 500.00, 'auction', 'active'),
+(5, 3, 300.00, 'sale', 'active'),
+(6, 2, 50.00, 'sale', 'active'),
+(1, 2, 100.00, 'auction', 'active');
                     </code>
                     </pre>
                     <br>
-                    <div style="font-size: 18px;"><li>Verify user login (example - in a real application, password hashing and secure comparison would be used):</li></div>
+                    <div style="font-size: 20px;">
+                    Allow admin to set up and manage auctions, including scheduling and pricing.
+                    </div>
+                    <div style="font-size: 18px;"><li>Set up a new auction (INSERT into auction table after creating a listing of type 'auction')</li></div>
                     <pre class="code-box"><code>
-SELECT userid, username, position
-FROM user
-WHERE username = 'newuser' AND password = 'hashedpassword123';
+INSERT INTO auction (listing_id, starting_time, end_time, starting_price, current_price) VALUES
+(2, '2025-05-20 10:00:00', '2025-05-25 18:00:00', 2000.00, 2200.00),
+(4, '2025-05-22 09:00:00', '2025-05-27 21:00:00', 450.00, 470.00),
+(6, '2025-06-01 10:00:00', '2025-06-08 18:00:00', 100.00, 100.00);
+                    </code>
+                    </pre>
+                    <br>
+                    <div style="font-size: 18px;"><li>Update an existing auction (UPDATE auction table)</li></div>
+                    <pre class="code-box"><code>
+SET end_time = '2025-06-09 20:00:00', current_price = 120.00
+WHERE auction_id = 1;
                     </code>
                     </pre>
                     <br><br>
                 <div style="font-size: 20px;">
-                    Card Listing and Authentication
+                    Allow buyers to browse available listings and add items to their cart.
                 </div>
-                    <div style="font-size: 18px;"><li>List a new card:</li></div>
-                    <pre class="code-box"><code>
-INSERT INTO card (cardname, cardset, `condition`, ownerid, card_image, card_hash)
-VALUES ('Charizard', 'Base Set', 'nearmint', 1, NULL, 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2');
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Admin mechanism to verify card authenticity (This is a conceptual query, actual verification would involve external processes or UI actions):</li></div>
-                    <pre class="code-box"><code>
-SELECT c.cardid, c.cardname, c.cardset, c.`condition`, u.username AS owner_username, c.card_image, c.card_hash
-FROM card c
-JOIN user u ON c.ownerid = u.userid
-WHERE c.card_hash = 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2';
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve all active listings with card and seller details:</li></div>
+                    <div style="font-size: 18px;"><li>Browse available listings (SELECT)</li></div>
                     <pre class="code-box"><code>
 SELECT
-    l.listingid,
+    l.listing_id,
     c.cardname,
     c.cardset,
-    c.`condition`,
+    c.condition,
     l.price,
     l.listing_type,
-    l.status,
     u.username AS seller_username
-FROM listing l
-JOIN card c ON l.cardid = c.cardid
-JOIN user u ON l.sellerid = u.userid
+FROM listing AS l
+JOIN card AS c ON l.card_id = c.card_id
+JOIN user AS u ON l.user_id = u.user_id
 WHERE l.status = 'active';
                     </code>
                     </pre>
-                    <br><br>
-                <div style="font-size: 20px;">
-                    Direct Sale Transactions
-                </div>
-                    <div style="font-size: 18px;"><li>Create a fixed-price listing:</li></div>
-                    <pre class="code-box"><code>
-INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
-VALUES (1, 1, 150.00, 'fixed', 'active', NOW()); 
-                    </code>
-                    </pre>
                     <br>
-                    <div style="font-size: 18px;"><li>Record a completed direct sale transaction:</li></div>
+                    <div style="font-size: 18px;"><li>Add items to cart (INSERT)</li></div>
                     <pre class="code-box"><code>
-INSERT INTO transaction (listingid, buyerid, sellerid, price, transaction_date, status)
-VALUES (1, 2, 1, 150.00, NOW(), 'completed');  
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Update listing status to 'sold' after a direct sale:</li></div>
-                    <pre class="code-box"><code>
-UPDATE listing
-SET status = 'sold'
-WHERE listingid = 1; 
+INSERT INTO cart (user_id, listing_id) VALUES
+(3, 1),
+(5, 5);
                     </code>
                     </pre>
                     <br><br>
-                <div style="font-size: 20px;">
-                    Auction Functionality
-                </div>
-                    <div style="font-size: 18px;"><li>Create an auction listing:</li></div>
+                    <div style="font-size: 20px;">
+                    Allow buyers to place bids on cards listed in active auctions.
+                    </div>
+                    <div style="font-size: 18px;"><li>Place a bid (INSERT)</li></div>
                     <pre class="code-box"><code>
-INSERT INTO listing (cardid, sellerid, price, listing_type, status, created_at)
-VALUES (1, 1, 0.00, 'auction', 'active', NOW()); 
+INSERT INTO bid (auction_id, user_id, amount, bid_time, status) VALUES
+(1, 3, 2100.00, '2025-05-21 14:00:00', 'active'),
+(1, 5, 2200.00, '2025-05-22 16:30:00', 'active'),
+(2, 1, 460.00, '2025-05-23 11:00:00', 'active');
                     </code>
                     </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Initiate an auction for a listing:</li></div>
-                    <pre class="code-box"><code>
-INSERT INTO auction (listingid, start_time, end_time, starting_price, current_price)
-VALUES (2, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 10.00, 10.00); 
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve active auctions with current prices:</li></div>
-                    <pre class="code-box"><code>
-SELECT
-    a.auctionid,
-    c.cardname,
-    l.listingid,
-    a.start_time,
-    a.end_time,
-    a.starting_price,
-    a.current_price,
-    u.username AS seller_username
-FROM auction a
-JOIN listing l ON a.listingid = l.listingid
-JOIN card c ON l.cardid = c.cardid
-JOIN user u ON l.sellerid = u.userid
-WHERE l.status = 'active' AND l.listing_type = 'auction';
-                    </code>
-                    </pre>
-                    <br><br>
-                <div style="font-size: 20px;">
-                    Bidding Management
-                </div>
-                    <div style="font-size: 18px;"><li>Place a new bid on an auction:</li></div>
-                    <pre class="code-box"><code>
-INSERT INTO bid (auctionid, bidderid, amount, bid_time)
-VALUES (1, 1, 15.00, NOW()); 
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Update the current price of an auction after a new bid:</li></div>
+                    <div style="font-size: 18px;"><li>To update the current_price in the auction table after a bid</li></div>
                     <pre class="code-box"><code>
 UPDATE auction
-SET current_price = (SELECT MAX(amount) FROM bid WHERE auctionid = 1) 
-WHERE auctionid = 1;
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve all bids for a specific auction:</li></div>
-                    <pre class="code-box"><code>
-SELECT
-    b.bidid,
-    u.username AS bidder_username,
-    b.amount,
-    b.bid_time
-FROM bid b
-JOIN user u ON b.bidderid = u.userid
-WHERE b.auctionid = 1
-ORDER BY b.bid_time DESC;
+SET current_price = (SELECT MAX(amount) FROM bid WHERE auction_id = 1)
+WHERE auction_id = 1;
                     </code>
                     </pre>
                     <br><br>
                 <div style="font-size: 20px;">
-                    Transaction Review System
+                    Allow buyers to purchase cards through a secure transaction process.
                 </div>
-                   <div style="font-size: 18px;"> <li>Place a new bid on an auction:</li></div>
+                    <div style="font-size: 18px;"><li>Update listing status to 'sold' after a successful transaction UPDATE listing</li></div>
                     <pre class="code-box"><code>
-INSERT INTO review (transactionid, reviewerid, rating, comment, created_at)
-VALUES (1, 2, 5, 'Great seller, card arrived quickly and as described!', NOW()); 
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve all reviews for a specific user (as a seller):</li></div>
-                    <pre class="code-box"><code>
-SELECT
-    r.reviewid,
-    t.transactionid,
-    u_reviewer.username AS reviewer_username,
-    r.rating,
-    r.comment,
-    r.created_at
-FROM review r
-JOIN transaction t ON r.transactionid = t.transactionid
-JOIN user u_reviewer ON r.reviewerid = u_reviewer.userid
-WHERE t.sellerid = 1; 
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Calculate average rating for a seller:</li></div>
-                    <pre class="code-box"><code>
-SELECT AVG(r.rating) AS average_rating
-FROM review r
-JOIN transaction t ON r.transactionid = t.transactionid
-WHERE t.sellerid = 1; 
+-- For sale listing:
+SET status = 'sold'
+WHERE listing_id = (SELECT listing_id FROM cart WHERE cart_id = 1);
+-- For auction:
+UPDATE listing
+SET status = 'sold'
+WHERE listing_id = (SELECT listing_id FROM auction WHERE auction_id = (SELECT auction_id FROM bid WHERE bid_id = 2));
                     </code>
                     </pre>
                     <br><br>
-                <div style="font-size: 20px;">
-                    Event Organization
-                </div>
-                    <div style="font-size: 18px;"><li>Create a new event:</li></div>
+                    <div style="font-size: 20px;">
+                    Allow buyers to leave ratings and reviews after completed transactions.
+                    </div>
+                    <div style="font-size: 18px;"><li>Leave a review (INSERT)</li></div>
                     <pre class="code-box"><code>
-INSERT INTO event (event_name, image, created_at)
-VALUES ('Community Card Tournament', NULL, NOW());
+INSERT INTO review (transaction_id, user_id, rating, comment) VALUES
+(1, 3, 5, 'Great seller, fast delivery!'),
+(3, 5, 4, 'Good card condition, happy with purchase.');
                     </code>
                     </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Retrieve all upcoming events:</li></div>
+                    <br><br>
+                    <div style="font-size: 20px;">
+                    Allow admin to manage and post event announcements related to the platform.
+                    </div>
+                    <div style="font-size: 18px;"><li>Post an event announcement (INSERT by an admin user)</li></div>
                     <pre class="code-box"><code>
-SELECT event_id, event_name, created_at, image
-FROM event
-WHERE created_at >= NOW()
-ORDER BY created_at ASC;
+INSERT INTO event (user_id, event_name, event_description, event_date, event_poster) VALUES
+(2, 'Pokémon Card Expo 2025', 'Annual event for card collectors and traders.', '2025-06-10', 'poster_pokemon_expo.png'),
+(1, 'Local Card Swap Meet', 'Meet and trade cards with local players.', '2025-05-30', 'poster_swap_meet.png');
                     </code>
                     </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Update event details (e.g., add an image):</li></div>
+                    <div style="font-size: 18px;"><li>Manage an event announcement (UPDATE by an admin user)</li></div>
                     <pre class="code-box"><code>
 UPDATE event
-SET image = NULL 
+SET event_description = 'An even grander event for trading and selling rare cards, with special guests!'
 WHERE event_id = 1;
                     </code>
                     </pre>
-                    <br><br>
-                <div style="font-size: 20px;">
-                    Card-User Association
-                </div>
-                    <div style="font-size: 18px;"><li>Find all cards owned by a specific user:</li></div>
-                    <pre class="code-box"><code>
-SELECT
-    c.cardid,
-    c.cardname,
-    c.cardset,
-    c.`condition`,
-    c.card_hash
-FROM card c
-WHERE c.ownerid = 1;
-                    </code>
-                    </pre>
-                    <br>
-                    <div style="font-size: 18px;"><li>Find all listings created by a specific user:</li></div>
-                    <pre class="code-box"><code>
-SELECT
-    l.listingid,
-    c.cardname,
-    c.cardset,
-    l.price,
-    l.listing_type,
-    l.status,
-    l.created_at
-FROM listing l
-JOIN card c ON l.cardid = c.cardid
-WHERE l.sellerid = 1;
-                    </code>
-                    </pre>
-                    <br>
-                    
             </div>
         </section>
         
         <section id="db-fiddle">
             <div class="dropdown">🔗 DB-Fiddle Link <span class="dropdown-arrow">▼</span></div>
             <div class="dropdown-content">
-                <a href="https://www.db-fiddle.com/f/woDz6gMiMYRyXNsDSwSxuV/10" 
+                <a href="https://www.db-fiddle.com/f/woDz6gMiMYRyXNsDSwSxuV/11"
                 target="_blank">Visit DB-Fiddle for SQL Simulation</a>
             </div>
         </section>        
